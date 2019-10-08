@@ -1,0 +1,76 @@
+<div class="card">
+    <div class="card-header d-flex justify-content-between align-items-center">
+        <h2>{{imgobtenida.titulo}}</h2>
+        <button class="btn btn-danger" id="btn-eliminar" data-id="{{imgobtenida.uniqueId}}">
+            <i class="fa fa-times"></i>Eliminar
+        </button>
+    </div>
+    <div class="card-body">
+        <p>{{imgobtenida.descripcion}}</p>
+        <div class="text-center">
+            <img src="/public/upload/{{imgobtenida.nombreimg}}" alt="Problemas con este imagen" class="img-fluid">
+        </div>
+    </div>
+    <div class="card-footer d-flex justify-content-between align-items-cencer">
+        <button class="btn btn-success" id="btn-like" data-id="{{imgobtenida.nombreimg}}">
+            <i class="fas fa-thumbs-up"></i>Like
+        </button>
+        <p>
+            <span class="likes-count">{{imgobtenida.likes}}</span>
+            <i class="fas fa-heart"></i>
+        </p>
+        <p>
+            <i class="fas fa-eye"></i>{{imgobtenida.vistas}}
+        </p>
+        <p>
+            <i class="far fa-clock"></i>{{tiempoatras imgobtenida.fecha}}
+        </p>
+    </div>
+</div>
+
+<div class="card mt-2">
+    <div class="card-header d-flex justify-content-between align-items-center">
+        <h3>Comentarios</h3>
+        <button class="btn btn-info" id="btn-mostrar-comentario">
+            <i class="fa fa-comment-o"></i>Comentar
+        </button>
+    </div>
+    <div class="card-body">
+        <blockquote id="publicar-comentario">
+            <form action="/images/{{imgobtenida.uniqueId}}/comment" method="POST">
+                <div class="form-group">
+                    <input type="text" class="form-control" name="nombre" placeholder="Nombre de la persona">
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" name="email" placeholder="Email de la persona">
+                </div>
+                <div class="form-group">
+                    <textarea name="comentario" rows="2" class="form-control" placeholder="Comentar"></textarea>
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-success" id="btn-comentar">
+                        <i class="fa fa-comment"></i>Enviar
+                    </button>
+                </div>
+            </form>
+        </blockquote>
+
+        <ul class="list-group p-4">
+            {{#each comentarioobtenido}}
+            <li class="list-group-item">
+                <div class="row">
+                    <a href="#" class="col text-center">
+                        <img src="http://gravatar.com/avatar/{{gravatar}}?d=monsterid&s=45" />
+                    </a>
+                    <blockquote class="col">
+                        <p class="lead">{{comentario}}</p>
+                        <footer class="blockquote-footer">
+                            {{nombre}}- {{tiempoatras fecha}}
+                        </footer>
+                    </blockquote>
+                </div>
+            </li>
+            {{/each}}
+        </ul>
+    </div>
+</div>
